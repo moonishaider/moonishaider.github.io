@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syed Moonis Haider | AI/ML & Agentic Systems Engineer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        accent: '#3b82f6',
+                        upwork: '#14a800'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* ─────────────────────────────────────────
+           Theme Variables
+        ───────────────────────────────────────── */
+        :root {
+            --bg:             #080808;
+            --bg-alt:         rgba(0, 0, 0, 0.45);
+            --text-primary:   #f3f4f6;
+            --text-muted:     #9ca3af;
+            --text-subtle:    #6b7280;
+            --glass-bg:       rgba(18, 18, 18, 0.80);
+            --glass-border:   rgba(255, 255, 255, 0.06);
+            --pill-bg:        rgba(255, 255, 255, 0.05);
+            --pill-border:    rgba(255, 255, 255, 0.10);
+            --card-border:    rgba(255, 255, 255, 0.06);
+            --timeline-line:  rgba(255, 255, 255, 0.10);
+        }
+
+        html.light {
+            --bg:             #f1f5f9;
+            --bg-alt:         rgba(203, 213, 225, 0.45);
+            --text-primary:   #0f172a;
+            --text-muted:     #475569;
+            --text-subtle:    #94a3b8;
+            --glass-bg:       rgba(255, 255, 255, 0.88);
+            --glass-border:   rgba(15, 23, 42, 0.09);
+            --pill-bg:        rgba(59, 130, 246, 0.06);
+            --pill-border:    rgba(59, 130, 246, 0.22);
+            --card-border:    rgba(15, 23, 42, 0.08);
+            --timeline-line:  rgba(15, 23, 42, 0.12);
+        }
+
+        /* ─────────────────────────────────────────
+           Base
+        ───────────────────────────────────────── */
+        *, *::before, *::after { box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-primary);
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        /* ─────────────────────────────────────────
+           Glassmorphism
+        ───────────────────────────────────────── */
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            transition: background 0.4s ease, border-color 0.3s ease;
+        }
+
+        /* ─────────────────────────────────────────
+           Project Cards
+        ───────────────────────────────────────── */
+        .project-card {
+            border: 1px solid var(--card-border);
+            border-radius: 0.75rem;
+            transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, background 0.4s ease;
+        }
+        .project-card:hover {
+            border-color: rgba(59, 130, 246, 0.45);
+            transform: translateY(-5px);
+            box-shadow: 0 16px 40px rgba(59, 130, 246, 0.08);
+        }
+
+        /* ─────────────────────────────────────────
+           Tech Pills
+        ───────────────────────────────────────── */
+        .tech-pill {
+            display: inline-flex;
+            align-items: center;
+            background: var(--pill-bg);
+            border: 1px solid var(--pill-border);
+            border-radius: 9999px;
+            padding: 0.45rem 1rem;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            white-space: nowrap;
+            cursor: default;
+            transition: background 0.25s ease, border-color 0.25s ease,
+                        transform 0.2s ease, color 0.25s ease;
+        }
+        .tech-pill i {
+            margin-right: 0.6rem;
+            color: #3b82f6;
+            font-size: 1rem;
+            flex-shrink: 0;
+            transition: color 0.25s ease;
+        }
+        .tech-pill:hover {
+            background: rgba(59, 130, 246, 0.14);
+            border-color: rgba(59, 130, 246, 0.42);
+            transform: translateY(-2px) scale(1.03);
+        }
+
+        /* ─────────────────────────────────────────
+           Cert Cards
+        ───────────────────────────────────────── */
+        .cert-card {
+            border-radius: 0.75rem;
+            transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .cert-card:hover {
+            background: rgba(59, 130, 246, 0.05) !important;
+            border-color: rgba(59, 130, 246, 0.40) !important;
+            box-shadow: 0 8px 30px rgba(59, 130, 246, 0.06);
+        }
+
+        /* ─────────────────────────────────────────
+           Contact links
+        ───────────────────────────────────────── */
+        .contact-link {
+            border-radius: 0.625rem;
+            transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .contact-link:hover {
+            border-color: rgba(59, 130, 246, 0.40) !important;
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.08);
+        }
+
+        /* ─────────────────────────────────────────
+           Theme toggle button
+        ───────────────────────────────────────── */
+        #theme-toggle {
+            width: 2.25rem;
+            height: 2.25rem;
+            border-radius: 9999px;
+            border: 1px solid var(--glass-border);
+            background: var(--pill-bg);
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 0.82rem;
+            transition: background 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+            flex-shrink: 0;
+        }
+        #theme-toggle:hover {
+            background: rgba(59, 130, 246, 0.15);
+            border-color: rgba(59, 130, 246, 0.42);
+            transform: scale(1.1) rotate(12deg);
+        }
+
+        /* ─────────────────────────────────────────
+           Stack section alt background
+        ───────────────────────────────────────── */
+        #stack-section {
+            background: var(--bg-alt);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-top: 1px solid var(--glass-border);
+            border-bottom: 1px solid var(--glass-border);
+            transition: background 0.4s ease, border-color 0.3s ease;
+        }
+
+        /* ─────────────────────────────────────────
+           Light mode — targeted overrides for Tailwind
+           utility classes that use hard-coded colors
+        ───────────────────────────────────────── */
+        html.light body                           { color: var(--text-primary); }
+        html.light .text-gray-400,
+        html.light .text-gray-300                 { color: var(--text-muted) !important; }
+        html.light .text-gray-500,
+        html.light .text-gray-600                 { color: var(--text-subtle) !important; }
+        html.light .text-white                    { color: var(--text-primary) !important; }
+        html.light h1, html.light h2,
+        html.light h3, html.light h4              { color: var(--text-primary); }
+
+        /* borders */
+        html.light [class*="border-white"]        { border-color: var(--glass-border) !important; }
+        html.light .border-l.border-white\/10     { border-color: var(--timeline-line) !important; }
+        html.light footer                         { border-color: var(--glass-border) !important; }
+        html.light footer p                       { color: var(--text-subtle) !important; }
+
+        /* cert image thumbnail */
+        html.light .cert-thumb {
+            background: rgba(15, 23, 42, 0.04) !important;
+            border-color: var(--glass-border) !important;
+        }
+
+        /* section number labels */
+        html.light .section-label                 { color: var(--text-subtle) !important; }
+
+        /* nav font-mono links */
+        html.light nav a:not(.text-upwork)        { color: var(--text-muted); }
+        html.light nav a:not(.text-upwork):hover  { color: #3b82f6; }
+        html.light nav span.font-mono             { color: #3b82f6; }
+
+        /* hero secondary button */
+        html.light .hero-outline-btn {
+            border-color: rgba(15, 23, 42, 0.15) !important;
+            color: var(--text-primary);
+        }
+        html.light .hero-outline-btn:hover        { background: rgba(15, 23, 42, 0.06) !important; }
+    </style>
+</head>
+<body class="font-sans selection:bg-blue-500 selection:text-white">
+
+    <!-- ─────────────── NAV ─────────────── -->
+    <nav class="fixed top-0 w-full z-50 glass border-b px-6 py-4" style="border-color: var(--glass-border);">
+        <div class="max-w-7xl mx-auto flex justify-between items-center gap-4">
+            <span class="font-mono font-bold text-xl tracking-tighter text-accent flex-shrink-0">
+                Syed Moonis Haider
+            </span>
+            <div class="flex items-center gap-6">
+                <div class="hidden md:flex items-center gap-8 font-mono text-[11px] uppercase tracking-[0.2em]">
+                    <a href="#projects"       class="hover:text-accent transition duration-200">Projects</a>
+                    <a href="#stack"          class="hover:text-accent transition duration-200">Stack</a>
+                    <a href="#experience"     class="hover:text-accent transition duration-200">Experience</a>
+                    <a href="#certifications" class="hover:text-accent transition duration-200">Certifications</a>
+                    <a href="https://www.upwork.com/freelancers/~01e413158b9ab12565" target="_blank"
+                       class="text-upwork hover:brightness-110 transition duration-200">Upwork</a>
+                </div>
+                <!-- Single toggle — always visible -->
+                <button id="theme-toggle" aria-label="Toggle light/dark mode">
+                    <i class="fa-solid fa-sun" id="theme-icon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ─────────────── HERO ─────────────── -->
+    <section class="min-h-screen flex flex-col justify-center px-6 max-w-7xl mx-auto pt-24 pb-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
+
+            <div class="space-y-6 text-center md:text-left order-2 md:order-1">
+                <p class="font-mono text-[#818cf8] text-2xl md:text-4xl tracking-[0.25em] uppercase font-black mb-4
+                          drop-shadow-[0_0_15px_rgba(129,140,248,0.3)]">
+                    SYED MOONIS HAIDER
+                </p>
+
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight">
+                    Architecting <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">
+                        Agentic Systems
+                    </span>
+                </h1>
+
+                <p class="text-lg md:text-xl text-gray-400 font-light max-w-2xl mx-auto md:mx-0 leading-relaxed">
+                    AI/ML Engineer specializing in Agentic RAG, Enterprise Automation, and Predictive Intelligence.
+                    I bridge the gap between raw data and autonomous decision-making.
+                </p>
+
+                <div class="flex flex-wrap gap-4 pt-6 justify-center md:justify-start">
+                    <a href="#projects"
+                       class="bg-accent text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-600
+                              transition duration-300 shadow-lg shadow-blue-500/20">
+                        View Portfolio
+                    </a>
+                    <a href="https://www.linkedin.com/in/syed-moonis-haider-7986ab277/" target="_blank"
+                       class="hero-outline-btn border border-white/10 hover:bg-white/5 px-8 py-3 rounded-lg
+                              font-semibold transition duration-300">
+                        LinkedIn Profile
+                    </a>
+                </div>
+            </div>
+
+            <div class="flex justify-center md:justify-end order-1 md:order-2 mb-10 md:mb-0">
+                <div class="relative group">
+                    <div class="absolute -inset-1 rounded-2xl bg-gradient-to-r from-blue-400 to-emerald-400
+                                opacity-15 blur-2xl group-hover:opacity-30 transition duration-500"></div>
+                    <div class="relative aspect-[4/5] w-72 md:w-96 overflow-hidden rounded-2xl
+                                border-4 border-accent/20 shadow-2xl transition duration-500
+                                transform group-hover:scale-[1.03]">
+                        <img src="moonis pic.jpg" alt="Syed Moonis Haider" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ─────────────── PROJECTS ─────────────── -->
+    <section id="projects" class="py-24 px-6 max-w-7xl mx-auto">
+        <div class="mb-16">
+            <p class="section-label font-mono text-gray-500 text-xs tracking-[0.2em] mb-3 uppercase">/ 01. Works</p>
+            <h2 class="text-4xl font-bold mb-3 tracking-tight">Project Gallery</h2>
+            <div class="h-[3px] w-12 rounded-full bg-accent"></div>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <div class="project-card glass p-8">
+                <div class="flex justify-between mb-6 text-accent">
+                    <i class="fa-solid fa-brain text-2xl"></i>
+                    <a href="https://github.com/moonishaider/CortexCompiler-The-Agentic-Second-Brain" target="_blank"
+                       class="hover:text-white transition duration-200"><i class="fa-brands fa-github text-xl"></i></a>
+                </div>
+                <h3 class="text-xl font-bold mb-3">CortexCompiler</h3>
+                <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                    The Agentic Second Brain. A self-evolving RAG system using multi-agent orchestration
+                    to automate knowledge synthesis.
+                </p>
+                <div class="flex flex-wrap gap-2 font-mono text-[9px] text-accent font-bold">
+                    <span class="bg-accent/10 px-2 py-1 rounded">AGENTIC AI</span>
+                    <span class="bg-accent/10 px-2 py-1 rounded">LANGCHAIN</span>
+                </div>
+            </div>
+
+            <div class="project-card glass p-8">
+                <div class="flex justify-between mb-6 text-emerald-400">
+                    <i class="fa-solid fa-satellite text-2xl"></i>
+                    <a href="https://github.com/moonishaider/Agro" target="_blank"
+                       class="hover:text-white transition duration-200"><i class="fa-brands fa-github text-xl"></i></a>
+                </div>
+                <h3 class="text-xl font-bold mb-3">Optimizing Central Pivot Irrigation</h3>
+                <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                    Pipeline for monitoring farms in Saudi Arabia. Processes satellite imagery for
+                    health metrics and asset tracking.
+                </p>
+                <div class="flex flex-wrap gap-2 font-mono text-[9px] text-emerald-400 font-bold">
+                    <span class="bg-emerald-400/10 px-2 py-1 rounded">COMPUTER VISION</span>
+                    <span class="bg-emerald-400/10 px-2 py-1 rounded">GIS</span>
+                </div>
+            </div>
+
+            <div class="project-card glass p-8">
+                <div class="flex justify-between mb-6 text-yellow-500">
+                    <i class="fa-solid fa-bolt text-2xl"></i>
+                    <a href="https://www.upwork.com/freelancers/~01e413158b9ab12565?p=2039473433112346624"
+                       target="_blank" class="hover:text-white transition duration-200">
+                        <i class="fa-solid fa-briefcase text-xl"></i>
+                    </a>
+                </div>
+                <h3 class="text-xl font-bold mb-3">n8n Outreach Engine</h3>
+                <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                    Multi-layered B2B lead intelligence and automated outreach pipelines powered by n8n workflows.
+                </p>
+                <div class="flex flex-wrap gap-2 font-mono text-[9px] text-yellow-500 font-bold">
+                    <span class="bg-yellow-500/10 px-2 py-1 rounded">N8N</span>
+                    <span class="bg-yellow-500/10 px-2 py-1 rounded">AUTOMATION</span>
+                </div>
+            </div>
+
+            <div class="project-card glass p-8">
+                <div class="flex justify-between mb-6 text-blue-400">
+                    <i class="fa-solid fa-layer-group text-2xl"></i>
+                    <a href="https://www.upwork.com/freelancers/~01e413158b9ab12565?p=2039464828143534080"
+                       target="_blank" class="hover:text-white transition duration-200">
+                        <i class="fa-solid fa-briefcase text-xl"></i>
+                    </a>
+                </div>
+                <h3 class="text-xl font-bold mb-3">Enterprise RAG Pipeline</h3>
+                <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                    Domain-specific retrieval architecture for high-accuracy enterprise datasets.
+                </p>
+                <div class="flex flex-wrap gap-2 font-mono text-[9px] text-blue-400 font-bold">
+                    <span class="bg-blue-400/10 px-2 py-1 rounded">RAG</span>
+                    <span class="bg-blue-400/10 px-2 py-1 rounded">VECTOR SEARCH</span>
+                </div>
+            </div>
+
+            <div class="project-card glass p-8">
+                <div class="flex justify-between mb-6 text-red-400">
+                    <i class="fa-solid fa-signature text-2xl"></i>
+                    <a href="https://github.com/moonishaider/Signature-Classification-using-CNN" target="_blank"
+                       class="hover:text-white transition duration-200"><i class="fa-brands fa-github text-xl"></i></a>
+                </div>
+                <h3 class="text-xl font-bold mb-3">Signature CNN</h3>
+                <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                    Biometric classification system utilizing CNN, HOG, and SIFT features for
+                    high-accuracy signature recognition.
+                </p>
+                <div class="flex flex-wrap gap-2 font-mono text-[9px] text-red-400 font-bold">
+                    <span class="bg-red-400/10 px-2 py-1 rounded">CNN</span>
+                    <span class="bg-red-400/10 px-2 py-1 rounded">OPENCV</span>
+                </div>
+            </div>
+
+            <div class="project-card glass p-8">
+                <div class="flex justify-between mb-6 text-blue-500">
+                    <i class="fa-solid fa-plane-arrival text-2xl"></i>
+                    <a href="https://github.com/moonishaider/Flight-Route-Optimization-using-Genetic-Algorithm"
+                       target="_blank" class="hover:text-white transition duration-200">
+                        <i class="fa-brands fa-github text-xl"></i>
+                    </a>
+                </div>
+                <h3 class="text-xl font-bold mb-3">Flight Route Optimization</h3>
+                <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                    Optimizing flight routes using Genetic Algorithms to reduce fuel and adapt to
+                    real-time weather constraints.
+                </p>
+                <div class="flex flex-wrap gap-2 font-mono text-[9px] text-blue-500 font-bold">
+                    <span class="bg-blue-500/10 px-2 py-1 rounded">PYTHON</span>
+                    <span class="bg-blue-500/10 px-2 py-1 rounded">ALGORITHMS</span>
+                </div>
+            </div>
+
+            <div class="project-card glass p-8">
+                <div class="flex justify-between mb-6 text-purple-400">
+                    <i class="fa-solid fa-link text-2xl"></i>
+                    <a href="https://github.com/naufilmoten/FineFlow-FYP" target="_blank"
+                       class="hover:text-white transition duration-200"><i class="fa-brands fa-github text-xl"></i></a>
+                </div>
+                <h3 class="text-xl font-bold mb-3">FineFlow Blockchain</h3>
+                <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                    Decentralized traffic e-challan system leveraging Solidity smart contracts
+                    and computer vision.
+                </p>
+                <div class="flex flex-wrap gap-2 font-mono text-[9px] text-purple-400 font-bold">
+                    <span class="bg-purple-400/10 px-2 py-1 rounded">SOLIDITY</span>
+                    <span class="bg-purple-400/10 px-2 py-1 rounded">BLOCKCHAIN</span>
+                </div>
+            </div>
+
+            <div class="project-card glass p-8">
+                <div class="flex justify-between mb-6 text-orange-400">
+                    <i class="fa-solid fa-i-cursor text-2xl"></i>
+                    <a href="https://github.com/moonishaider/WordPredict" target="_blank"
+                       class="hover:text-white transition duration-200"><i class="fa-brands fa-github text-xl"></i></a>
+                </div>
+                <h3 class="text-xl font-bold mb-3">LSTM Word Prediction</h3>
+                <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                    Deep learning sequential model built for real-time text prediction and pattern
+                    recognition using LSTM.
+                </p>
+                <div class="flex flex-wrap gap-2 font-mono text-[9px] text-orange-400 font-bold">
+                    <span class="bg-orange-400/10 px-2 py-1 rounded">DL</span>
+                    <span class="bg-orange-400/10 px-2 py-1 rounded">LSTM</span>
+                </div>
+            </div>
+
+            <div class="project-card glass p-8">
+                <div class="flex justify-between mb-6 text-yellow-600">
+                    <i class="fa-brands fa-aws text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3">AWS DevOps Pipeline</h3>
+                <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                    End-to-end microservices deployment with automated CI/CD leveraging AWS Academy standards.
+                </p>
+                <div class="flex flex-wrap gap-2 font-mono text-[9px] text-yellow-600 font-bold">
+                    <span class="bg-yellow-600/10 px-2 py-1 rounded">AWS</span>
+                    <span class="bg-yellow-600/10 px-2 py-1 rounded">DEVOPS</span>
+                </div>
+            </div>
+
+            <div class="project-card glass p-8 lg:col-start-2">
+                <div class="flex justify-between mb-6 text-pink-400">
+                    <i class="fa-solid fa-shield-halved text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3">Anomaly Detection</h3>
+                <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                    ML pipeline for identifying high-dimensional outliers and securing data integrity.
+                </p>
+                <div class="flex flex-wrap gap-2 font-mono text-[9px] text-pink-400 font-bold">
+                    <span class="bg-pink-400/10 px-2 py-1 rounded">ML</span>
+                    <span class="bg-pink-400/10 px-2 py-1 rounded">DATA SCIENCE</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ─────────────── STACK ─────────────── -->
+    <section id="stack">
+        <div id="stack-section" class="pt-24 pb-16 px-6">
+            <div class="max-w-7xl mx-auto">
+                <div class="mb-16">
+                    <p class="section-label font-mono text-gray-500 text-xs tracking-[0.2em] mb-3 uppercase">/ 02. Technical Stack</p>
+                    <h2 class="text-4xl font-bold mb-3 tracking-tight">Technologies I Work With</h2>
+                    <div class="h-[3px] w-12 rounded-full bg-accent"></div>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-y-12 gap-x-12 font-mono">
+
+                    <div>
+                        <h4 class="text-accent mb-5 text-[11px] font-bold uppercase tracking-[0.2em]">Languages</h4>
+                        <div class="flex flex-wrap gap-3">
+                            <div class="tech-pill"><i class="fab fa-python"></i>Python</div>
+                            <div class="tech-pill"><i class="fas fa-database"></i>SQL</div>
+                            <div class="tech-pill"><i class="fas fa-microchip"></i>C++</div>
+                            <div class="tech-pill"><i class="fab fa-js"></i>JavaScript</div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="text-accent mb-5 text-[11px] font-bold uppercase tracking-[0.2em]">AI & ML Frameworks</h4>
+                        <div class="flex flex-wrap gap-3">
+                            <div class="tech-pill"><i class="fas fa-brain"></i>PyTorch</div>
+                            <div class="tech-pill"><i class="fas fa-project-diagram"></i>TensorFlow</div>
+                            <div class="tech-pill"><i class="fas fa-filter"></i>Scikit-learn</div>
+                            <div class="tech-pill"><i class="fas fa-eye"></i>OpenCV</div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="text-accent mb-5 text-[11px] font-bold uppercase tracking-[0.2em]">Agentic & GenAI</h4>
+                        <div class="flex flex-wrap gap-3">
+                            <div class="tech-pill"><i class="fas fa-route"></i>LangChain</div>
+                            <div class="tech-pill"><i class="fas fa-users-cog"></i>CrewAI</div>
+                            <div class="tech-pill"><i class="fas fa-robot"></i>AutoGen</div>
+                            <div class="tech-pill"><i class="fas fa-book-open"></i>LlamaIndex</div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="text-accent mb-5 text-[11px] font-bold uppercase tracking-[0.2em]">Automation & Orchestration</h4>
+                        <div class="flex flex-wrap gap-3">
+                            <div class="tech-pill"><i class="fas fa-plug"></i>n8n</div>
+                            <div class="tech-pill"><i class="fas fa-terminal"></i>GitHub Actions</div>
+                            <div class="tech-pill"><i class="fas fa-share-alt"></i>FastAPI</div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="text-accent mb-5 text-[11px] font-bold uppercase tracking-[0.2em]">Data & Vector Stores</h4>
+                        <div class="flex flex-wrap gap-3">
+                            <div class="tech-pill"><i class="fas fa-server"></i>PostgreSQL</div>
+                            <div class="tech-pill"><i class="fas fa-cube"></i>Milvus / Pinecone</div>
+                            <div class="tech-pill"><i class="fas fa-map-marked-alt"></i>PostGIS</div>
+                            <div class="tech-pill"><i class="fas fa-database"></i>MongoDB</div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="text-accent mb-5 text-[11px] font-bold uppercase tracking-[0.2em]">Cloud & Infrastructure</h4>
+                        <div class="flex flex-wrap gap-3">
+                            <div class="tech-pill"><i class="fab fa-aws"></i>AWS</div>
+                            <div class="tech-pill"><i class="fab fa-docker"></i>Docker</div>
+                            <div class="tech-pill"><i class="fas fa-dharmachakra"></i>Kubernetes</div>
+                            <div class="tech-pill"><i class="fas fa-map"></i>Terraform</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─────────────── EXPERIENCE ─────────────── -->
+    <section id="experience" class="pt-16 pb-24 px-6 max-w-4xl mx-auto">
+        <div class="flex items-center mb-16">
+            <h2 class="text-4xl font-bold tracking-tight flex-shrink-0">Professional Experience</h2>
+            <div class="h-[1px] flex-grow ml-8" style="background: var(--timeline-line);"></div>
+        </div>
+
+        <div class="space-y-12">
+
+            <div class="border-l pl-8 relative" style="border-color: rgba(59,130,246,0.35);">
+                <div class="absolute -left-[5px] top-1 w-2.5 h-2.5 rounded-full bg-accent
+                            shadow-[0_0_12px_#3b82f6]"></div>
+                <div>
+                    <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-2">
+                        <h4 class="text-xl font-bold text-white">AI/ML Freelance Engineer</h4>
+                        <span class="text-accent font-mono text-xs uppercase tracking-widest">Dec 2022 — Present</span>
+                    </div>
+                    <p class="text-accent font-mono text-[10px] mb-3 font-bold uppercase tracking-tighter">
+                        Upwork AI Automation Specialist
+                    </p>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Engineering production-ready RAG pipelines and n8n-powered automation for international clients.
+                        Specialized in fine-tuning LLMs, vector database optimization (Milvus/Pinecone), and integrating
+                        autonomous AI agents into enterprise B2B workflows.
+                    </p>
+                </div>
+            </div>
+
+            <div class="border-l pl-8 relative" style="border-color: var(--timeline-line);">
+                <div class="absolute -left-[5px] top-1 w-2.5 h-2.5 rounded-full bg-gray-600"></div>
+                <div>
+                    <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-2">
+                        <h4 class="text-xl font-bold text-white">AI/ML Engineer</h4>
+                        <span class="text-gray-500 font-mono text-xs uppercase tracking-widest">Feb 2025 — Nov 2025</span>
+                    </div>
+                    <p class="text-gray-500 text-sm font-mono mb-3">Techno Storm Studios</p>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Developed core machine learning models and computer vision applications. Focused on optimizing
+                        model performance and deploying scalable AI solutions within enterprise environments.
+                    </p>
+                </div>
+            </div>
+
+            <div class="border-l pl-8 relative" style="border-color: var(--timeline-line);">
+                <div class="absolute -left-[5px] top-1 w-2.5 h-2.5 rounded-full bg-gray-600"></div>
+                <div>
+                    <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-2">
+                        <h4 class="text-xl font-bold text-white">Teaching Assistant</h4>
+                        <span class="text-gray-500 font-mono text-xs uppercase tracking-widest">Jan 2024 — June 2024</span>
+                    </div>
+                    <p class="text-gray-500 text-sm font-mono mb-3">FAST NUCES</p>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Assisted in delivering course content for technical computing and machine learning modules.
+                        Mentored students on algorithmic complexity and AI project development.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ─────────────── CERTIFICATIONS ─────────────── -->
+    <section id="certifications" class="py-24 px-6 max-w-4xl mx-auto">
+        <div class="mb-16">
+            <p class="section-label font-mono text-gray-500 text-xs tracking-[0.2em] mb-3 uppercase">/ 03. Credentials</p>
+            <h2 class="text-4xl font-bold mb-3 tracking-tight">Certifications</h2>
+            <div class="h-[3px] w-12 rounded-full bg-accent"></div>
+        </div>
+
+        <div class="flex flex-col gap-5">
+
+            <div class="cert-card glass p-6 flex items-center gap-6 border"
+                 style="border-color: var(--glass-border);">
+                <div class="cert-thumb flex-shrink-0 w-32 h-20 overflow-hidden rounded-lg
+                            border" style="border-color: var(--glass-border); background: rgba(0,0,0,0.35);">
+                    <img src="aws certificate.png" alt="AWS Certificate"
+                         class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition duration-300">
+                </div>
+                <div class="flex-grow">
+                    <h4 class="text-lg font-bold text-white leading-tight">AWS Academy Graduate</h4>
+                    <p class="text-gray-500 text-xs mb-3">Microservices and CI/CD Pipeline Builders</p>
+                    <div class="flex items-center justify-between flex-wrap gap-2">
+                        <span class="text-[10px] font-mono text-gray-400 uppercase tracking-tighter">
+                            AWS Academy • April 2024
+                        </span>
+                        <a href="https://www.credly.com/badges/7bd2ef3e-8271-4833-b08e-3bbe5ee164c0/print"
+                           target="_blank"
+                           class="text-accent text-xs font-semibold flex items-center gap-1.5 hover:underline transition">
+                            View Credential <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cert-card glass p-6 flex items-center gap-6 border"
+                 style="border-color: var(--glass-border);">
+                <div class="cert-thumb flex-shrink-0 w-32 h-20 overflow-hidden rounded-lg
+                            border" style="border-color: var(--glass-border); background: rgba(0,0,0,0.35);">
+                    <img src="dv.png" alt="Data Visualization"
+                         class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition duration-300">
+                </div>
+                <div class="flex-grow">
+                    <h4 class="text-lg font-bold text-white leading-tight">Data Visualization in Power BI</h4>
+                    <p class="text-gray-500 text-xs mb-3">Expert-level data storytelling and dashboarding</p>
+                    <div class="flex items-center justify-between flex-wrap gap-2">
+                        <span class="text-[10px] font-mono text-gray-400 uppercase tracking-tighter">
+                            DataCamp • Nov 2025
+                        </span>
+                        <a href="https://www.datacamp.com/completed/statement-of-accomplishment/course/4bf38496649b11a2d9f450821e8b39b3fde1091b"
+                           target="_blank"
+                           class="text-accent text-xs font-semibold flex items-center gap-1.5 hover:underline transition">
+                            View Credential <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cert-card glass p-6 flex items-center gap-6 border"
+                 style="border-color: var(--glass-border);">
+                <div class="cert-thumb flex-shrink-0 w-32 h-20 overflow-hidden rounded-lg
+                            border" style="border-color: var(--glass-border); background: rgba(0,0,0,0.35);">
+                    <img src="intro.png" alt="Intro to Power BI"
+                         class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition duration-300">
+                </div>
+                <div class="flex-grow">
+                    <h4 class="text-lg font-bold text-white leading-tight">Introduction to Power BI</h4>
+                    <p class="text-gray-500 text-xs mb-3">Foundational data modeling and analytics</p>
+                    <div class="flex items-center justify-between flex-wrap gap-2">
+                        <span class="text-[10px] font-mono text-gray-400 uppercase tracking-tighter">
+                            DataCamp • Nov 2025
+                        </span>
+                        <a href="https://www.datacamp.com/completed/statement-of-accomplishment/course/68feae4afa1e32b79d2bfe9d12abb6d4192e0760"
+                           target="_blank"
+                           class="text-accent text-xs font-semibold flex items-center gap-1.5 hover:underline transition">
+                            View Credential <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ─────────────── CONTACT ─────────────── -->
+    <section id="contact" class="py-24 px-6 max-w-4xl mx-auto text-center">
+        <div class="mb-16 text-left md:text-center">
+            <p class="section-label font-mono text-gray-500 text-xs tracking-[0.2em] mb-3 uppercase">04. Contact</p>
+            <h2 class="text-4xl md:text-5xl font-bold mb-6 tracking-tight">Get In Touch</h2>
+            <div class="h-[3px] w-12 rounded-full bg-accent mx-auto"></div>
+        </div>
+
+        <p class="text-gray-400 text-lg mb-12 max-w-2xl mx-auto leading-relaxed">
+            I'm currently open to new opportunities. Whether you have a question or just want
+            to say hi — my inbox is always open.
+        </p>
+
+        <div class="space-y-4 max-w-md mx-auto mb-12">
+            <a href="mailto:moonishaider12@gmail.com"
+               class="contact-link glass p-4 flex items-center justify-center gap-4 border group"
+               style="border-color: var(--glass-border);">
+                <i class="fa-solid fa-envelope text-accent opacity-70 group-hover:opacity-100 transition duration-200"></i>
+                <span class="text-gray-300 font-mono text-sm">moonishaider12@gmail.com</span>
+            </a>
+
+            <a href="https://www.linkedin.com/in/syed-moonis-haider-7986ab277/" target="_blank"
+               class="contact-link glass p-4 flex items-center justify-center gap-4 border group"
+               style="border-color: var(--glass-border);">
+                <i class="fa-brands fa-linkedin text-accent opacity-70 group-hover:opacity-100 transition duration-200"></i>
+                <span class="text-gray-300 font-mono text-sm">linkedin.com/in/syed-moonis-haider</span>
+            </a>
+
+            <a href="https://github.com/moonishaider" target="_blank"
+               class="contact-link glass p-4 flex items-center justify-center gap-4 border group"
+               style="border-color: var(--glass-border);">
+                <i class="fa-brands fa-github text-accent opacity-70 group-hover:opacity-100 transition duration-200"></i>
+                <span class="text-gray-300 font-mono text-sm">github.com/moonishaider</span>
+            </a>
+        </div>
+
+        <a href="mailto:moonishaider12@gmail.com"
+           class="inline-block bg-[#818cf8] hover:bg-[#6366f1] text-white px-10 py-4 rounded-xl font-bold
+                  shadow-lg shadow-indigo-500/25 transition-all duration-300 transform hover:-translate-y-1
+                  hover:shadow-indigo-500/40">
+            Say Hello
+        </a>
+    </section>
+
+    <!-- ─────────────── FOOTER ─────────────── -->
+    <footer class="py-12 text-center border-t" style="border-color: var(--glass-border);">
+        <p class="text-[10px] font-mono tracking-widest uppercase" style="color: var(--text-subtle);">
+            &copy; 2026 Syed Moonis Haider. Optimized for Agentic Intelligence.
+        </p>
+    </footer>
+
+    <!-- ─────────────── THEME TOGGLE SCRIPT ─────────────── -->
+    <script>
+        const html = document.documentElement;
+        const icon   = document.getElementById('theme-icon');
+        const toggle = document.getElementById('theme-toggle');
+
+        function applyTheme(isLight) {
+            html.classList.toggle('light', isLight);
+            icon.className = isLight ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        }
+
+        const saved = localStorage.getItem('theme');
+        const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+        applyTheme(saved ? saved === 'light' : prefersLight);
+
+        toggle.addEventListener('click', () => applyTheme(!html.classList.contains('light')));
+    </script>
+
+</body>
+</html>
