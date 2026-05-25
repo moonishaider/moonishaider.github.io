@@ -90,6 +90,42 @@
             transform: translateY(-5px);
             box-shadow: 0 16px 40px rgba(59, 130, 246, 0.08);
         }
+        .featured-card {
+            position: relative;
+            border-color: rgba(59, 130, 246, 0.28);
+            background:
+                linear-gradient(145deg, rgba(59, 130, 246, 0.12), rgba(18, 18, 18, 0.82) 36%),
+                var(--glass-bg);
+        }
+        .featured-card::before {
+            content: "";
+            position: absolute;
+            inset: -1px;
+            border-radius: inherit;
+            pointer-events: none;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.34), transparent 42%, rgba(16, 185, 129, 0.18));
+            opacity: 0.45;
+            mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            padding: 1px;
+            mask-composite: exclude;
+            -webkit-mask-composite: xor;
+        }
+        .featured-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            border: 1px solid rgba(59, 130, 246, 0.28);
+            background: rgba(59, 130, 246, 0.10);
+            color: #93c5fd;
+            border-radius: 9999px;
+            padding: 0.35rem 0.65rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
 
         /* ─────────────────────────────────────────
            Tech Pills
@@ -173,6 +209,57 @@
             border-color: rgba(59, 130, 246, 0.42);
             transform: scale(1.1) rotate(12deg);
         }
+        #mobile-menu-toggle {
+            width: 2.25rem;
+            height: 2.25rem;
+            border-radius: 9999px;
+            border: 1px solid var(--glass-border);
+            background: var(--pill-bg);
+            color: var(--text-primary);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+        }
+        #mobile-menu-toggle:hover {
+            background: rgba(59, 130, 246, 0.15);
+            border-color: rgba(59, 130, 246, 0.42);
+            transform: scale(1.06);
+        }
+        #mobile-menu {
+            display: none;
+            border-top: 1px solid var(--glass-border);
+        }
+        #mobile-menu.open {
+            display: block;
+        }
+        .mobile-nav-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.85rem 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            transition: color 0.2s ease;
+        }
+        .mobile-nav-link:hover {
+            color: #3b82f6;
+        }
+        @media (max-width: 767px) {
+            #mobile-menu-toggle {
+                display: flex;
+            }
+        }
+        @media (min-width: 768px) {
+            #mobile-menu {
+                display: none !important;
+            }
+        }
 
         /* ─────────────────────────────────────────
            Stack section alt background
@@ -225,6 +312,11 @@
             color: var(--text-primary);
         }
         html.light .hero-outline-btn:hover        { background: rgba(15, 23, 42, 0.06) !important; }
+        html.light .featured-card {
+            background:
+                linear-gradient(145deg, rgba(59, 130, 246, 0.10), rgba(255, 255, 255, 0.92) 38%),
+                var(--glass-bg);
+        }
     </style>
 </head>
 <body class="font-sans selection:bg-blue-500 selection:text-white">
@@ -244,10 +336,22 @@
                     <a href="https://www.upwork.com/freelancers/~01e413158b9ab12565" target="_blank"
                        class="text-upwork hover:brightness-110 transition duration-200">Upwork</a>
                 </div>
+                <button id="mobile-menu-toggle" class="md:hidden" aria-label="Open navigation menu" aria-expanded="false">
+                    <i class="fa-solid fa-bars" id="mobile-menu-icon"></i>
+                </button>
                 <!-- Single toggle — always visible -->
                 <button id="theme-toggle" aria-label="Toggle light/dark mode">
                     <i class="fa-solid fa-sun" id="theme-icon"></i>
                 </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden mt-4 px-1">
+            <div class="max-w-7xl mx-auto">
+                <a href="#projects" class="mobile-nav-link">Projects <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
+                <a href="#stack" class="mobile-nav-link">Stack <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
+                <a href="#experience" class="mobile-nav-link">Experience <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
+                <a href="#certifications" class="mobile-nav-link">Certifications <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
+                <a href="#contact" class="mobile-nav-link">Contact <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
             </div>
         </div>
     </nav>
@@ -257,9 +361,9 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
 
             <div class="space-y-6 text-center md:text-left order-2 md:order-1">
-                <p class="font-mono text-[#818cf8] text-2xl md:text-4xl tracking-[0.25em] uppercase font-black mb-4
+                <p class="font-mono text-[#818cf8] text-xs md:text-sm tracking-[0.25em] uppercase font-black mb-4
                           drop-shadow-[0_0_15px_rgba(129,140,248,0.3)]">
-                    SYED MOONIS HAIDER
+                    AI/ML Engineer • Agentic Automation
                 </p>
 
                 <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight">
@@ -312,12 +416,13 @@
 
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-            <div class="project-card glass p-8">
+            <div class="project-card featured-card glass p-8">
                 <div class="flex justify-between mb-6 text-emerald-400">
                     <i class="fa-solid fa-file-pdf text-2xl"></i>
                     <a href="https://github.com/Inside-Success-TV/green-light-pdf-generator" target="_blank"
                        class="hover:text-white transition duration-200"><i class="fa-brands fa-github text-xl"></i></a>
                 </div>
+                <div class="featured-badge mb-4"><i class="fa-solid fa-star text-[9px]"></i>Automation</div>
                 <h3 class="text-xl font-bold mb-3">Green Light PDF Generator</h3>
                 <p class="text-gray-400 text-sm mb-6 leading-relaxed">
                     AI production-document workflow that converts raw Zoom/casting transcripts into polished
@@ -330,12 +435,13 @@
                 </div>
             </div>
 
-            <div class="project-card glass p-8">
+            <div class="project-card featured-card glass p-8">
                 <div class="flex justify-between mb-6 text-yellow-500">
                     <i class="fa-solid fa-chart-line text-2xl"></i>
                     <a href="https://github.com/Inside-Success-TV/sales-performance-dashboard" target="_blank"
                        class="hover:text-white transition duration-200"><i class="fa-brands fa-github text-xl"></i></a>
                 </div>
+                <div class="featured-badge mb-4"><i class="fa-solid fa-star text-[9px]"></i>Workflow</div>
                 <h3 class="text-xl font-bold mb-3">Zoom → Airtable n8n Workflow & Sales Dashboard</h3>
                 <p class="text-gray-400 text-sm mb-6 leading-relaxed">
                     n8n-powered sales coaching pipeline that connects Zoom call data, Airtable scorecards,
@@ -349,12 +455,13 @@
                 </div>
             </div>
 
-            <div class="project-card glass p-8">
+            <div class="project-card featured-card glass p-8">
                 <div class="flex justify-between mb-6 text-pink-400">
                     <i class="fa-solid fa-wand-magic-sparkles text-2xl"></i>
                     <a href="https://github.com/moonishaider/istv-thumbnail-engine" target="_blank"
                        class="hover:text-white transition duration-200"><i class="fa-brands fa-github text-xl"></i></a>
                 </div>
+                <div class="featured-badge mb-4"><i class="fa-solid fa-star text-[9px]"></i>AI Tool</div>
                 <h3 class="text-xl font-bold mb-3">Thumbnail Image Generator</h3>
                 <p class="text-gray-400 text-sm mb-6 leading-relaxed">
                     AI media-asset engine that takes a subject image, industry context, style preset,
@@ -685,14 +792,17 @@
 
         <div class="flex flex-col gap-5">
 
-            <div class="cert-card glass p-6 flex items-center gap-6 border"
+            <div class="cert-card glass p-5 md:p-6 flex flex-col sm:flex-row sm:items-center gap-6 border group"
                  style="border-color: var(--glass-border);">
-                <div class="cert-thumb flex-shrink-0 w-32 h-20 overflow-hidden rounded-lg
+                <div class="cert-thumb flex-shrink-0 w-full sm:w-36 h-28 sm:h-24 overflow-hidden rounded-lg
                             border" style="border-color: var(--glass-border); background: rgba(0,0,0,0.35);">
                     <img src="aws certificate.png" alt="AWS Certificate"
-                         class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition duration-300">
+                         class="w-full h-full object-contain p-2 opacity-85 group-hover:opacity-100 transition duration-300">
                 </div>
                 <div class="flex-grow">
+                    <span class="inline-flex items-center gap-2 text-[9px] font-mono uppercase tracking-[0.18em] text-accent mb-2">
+                        <i class="fa-solid fa-certificate"></i> Verified Credential
+                    </span>
                     <h4 class="text-lg font-bold text-white leading-tight">AWS Academy Graduate</h4>
                     <p class="text-gray-500 text-xs mb-3">Microservices and CI/CD Pipeline Builders</p>
                     <div class="flex items-center justify-between flex-wrap gap-2">
@@ -708,14 +818,17 @@
                 </div>
             </div>
 
-            <div class="cert-card glass p-6 flex items-center gap-6 border"
+            <div class="cert-card glass p-5 md:p-6 flex flex-col sm:flex-row sm:items-center gap-6 border group"
                  style="border-color: var(--glass-border);">
-                <div class="cert-thumb flex-shrink-0 w-32 h-20 overflow-hidden rounded-lg
+                <div class="cert-thumb flex-shrink-0 w-full sm:w-36 h-28 sm:h-24 overflow-hidden rounded-lg
                             border" style="border-color: var(--glass-border); background: rgba(0,0,0,0.35);">
                     <img src="dv.png" alt="Data Visualization"
-                         class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition duration-300">
+                         class="w-full h-full object-contain p-2 opacity-85 group-hover:opacity-100 transition duration-300">
                 </div>
                 <div class="flex-grow">
+                    <span class="inline-flex items-center gap-2 text-[9px] font-mono uppercase tracking-[0.18em] text-accent mb-2">
+                        <i class="fa-solid fa-certificate"></i> Verified Credential
+                    </span>
                     <h4 class="text-lg font-bold text-white leading-tight">Data Visualization in Power BI</h4>
                     <p class="text-gray-500 text-xs mb-3">Expert-level data storytelling and dashboarding</p>
                     <div class="flex items-center justify-between flex-wrap gap-2">
@@ -731,14 +844,17 @@
                 </div>
             </div>
 
-            <div class="cert-card glass p-6 flex items-center gap-6 border"
+            <div class="cert-card glass p-5 md:p-6 flex flex-col sm:flex-row sm:items-center gap-6 border group"
                  style="border-color: var(--glass-border);">
-                <div class="cert-thumb flex-shrink-0 w-32 h-20 overflow-hidden rounded-lg
+                <div class="cert-thumb flex-shrink-0 w-full sm:w-36 h-28 sm:h-24 overflow-hidden rounded-lg
                             border" style="border-color: var(--glass-border); background: rgba(0,0,0,0.35);">
                     <img src="intro.png" alt="Intro to Power BI"
-                         class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition duration-300">
+                         class="w-full h-full object-contain p-2 opacity-85 group-hover:opacity-100 transition duration-300">
                 </div>
                 <div class="flex-grow">
+                    <span class="inline-flex items-center gap-2 text-[9px] font-mono uppercase tracking-[0.18em] text-accent mb-2">
+                        <i class="fa-solid fa-certificate"></i> Verified Credential
+                    </span>
                     <h4 class="text-lg font-bold text-white leading-tight">Introduction to Power BI</h4>
                     <p class="text-gray-500 text-xs mb-3">Foundational data modeling and analytics</p>
                     <div class="flex items-center justify-between flex-wrap gap-2">
@@ -766,8 +882,8 @@
         </div>
 
         <p class="text-gray-400 text-lg mb-12 max-w-2xl mx-auto leading-relaxed">
-            I'm currently open to new opportunities. Whether you have a question or just want
-            to say hi — my inbox is always open.
+            If you need an AI workflow, RAG system, dashboard, or automation pipeline built with care,
+            send me the context and I will respond with a practical next step.
         </p>
 
         <div class="space-y-4 max-w-md mx-auto mb-12">
@@ -797,7 +913,7 @@
            class="inline-block bg-[#818cf8] hover:bg-[#6366f1] text-white px-10 py-4 rounded-xl font-bold
                   shadow-lg shadow-indigo-500/25 transition-all duration-300 transform hover:-translate-y-1
                   hover:shadow-indigo-500/40">
-            Say Hello
+            Discuss an Automation Project
         </a>
     </section>
 
@@ -813,6 +929,9 @@
         const html = document.documentElement;
         const icon   = document.getElementById('theme-icon');
         const toggle = document.getElementById('theme-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenuIcon = document.getElementById('mobile-menu-icon');
 
         function applyTheme(isLight) {
             html.classList.toggle('light', isLight);
@@ -825,6 +944,22 @@
         applyTheme(saved ? saved === 'light' : prefersLight);
 
         toggle.addEventListener('click', () => applyTheme(!html.classList.contains('light')));
+
+        mobileMenuToggle.addEventListener('click', () => {
+            const isOpen = mobileMenu.classList.toggle('open');
+            mobileMenuToggle.setAttribute('aria-expanded', String(isOpen));
+            mobileMenuToggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+            mobileMenuIcon.className = isOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
+        });
+
+        mobileMenu.querySelectorAll('a').forEach((link) => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+                mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                mobileMenuToggle.setAttribute('aria-label', 'Open navigation menu');
+                mobileMenuIcon.className = 'fa-solid fa-bars';
+            });
+        });
     </script>
 
 </body>
