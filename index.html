@@ -23,6 +23,14 @@
   <meta name="twitter:description" content="Production AI, internal tools, and automation designed around evidence, human review, and real operating constraints.">
   <meta name="twitter:image" content="https://moonishaider.github.io/og-portfolio.png">
   <link rel="preload" href="moonis-portrait.webp" as="image" type="image/webp">
+  <script>
+    try {
+      const savedTheme = localStorage.getItem('portfolio-theme');
+      const initialTheme = savedTheme || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+      document.documentElement.dataset.theme = initialTheme;
+      document.querySelector('meta[name="theme-color"]').content = initialTheme === 'light' ? '#f0eee8' : '#0a0a0b';
+    } catch { /* Keep the dark default when storage is unavailable. */ }
+  </script>
   <link rel="stylesheet" href="styles.css">
   <script type="application/ld+json">
   {
@@ -110,8 +118,18 @@
               </dl>
               <a class="case-link" href="https://github.com/Inside-Success/sales-performance-dashboard" target="_blank" rel="noopener noreferrer" aria-label="View the Sales Intelligence and Coaching Platform repository on GitHub">View public repository <span aria-hidden="true">↗</span></a>
             </div>
-            <div class="system-map" role="img" aria-label="Sales platform architecture: calls flow through automation and secure ingestion into coaching and manager review">
-              <div class="map-label">SYSTEM MAP</div><div class="map-node node-a"><span>INPUT</span>Sales calls</div><div class="map-line line-a" aria-hidden="true"></div><div class="map-node node-b"><span>ORCHESTRATE</span>n8n pipeline</div><div class="map-line line-b" aria-hidden="true"></div><div class="map-node node-c"><span>PRODUCT</span>Coaching</div><div class="map-node node-d"><span>REVIEW</span>Manager view</div><div class="map-foot">Next.js / TypeScript / Neon / n8n</div>
+            <div class="system-map" role="img" aria-label="Sales platform architecture: sales calls move through n8n orchestration and secure ingestion into coaching and manager review">
+              <div class="map-label">SYSTEM MAP</div>
+              <div class="sales-flow" aria-hidden="true">
+                <div class="map-node"><span>01 · INPUT</span>Sales calls</div>
+                <div class="flow-arrow">↓</div>
+                <div class="map-node map-node-active"><span>02 · ORCHESTRATE</span>n8n pipeline</div>
+                <div class="flow-arrow">↓</div>
+                <div class="map-node"><span>03 · INGEST</span>Secure data layer</div>
+                <div class="flow-arrow flow-arrow-split">↙ &nbsp; ↘</div>
+                <div class="flow-output"><div class="map-node"><span>04 · PRODUCT</span>Coaching</div><div class="map-node"><span>05 · REVIEW</span>Manager view</div></div>
+              </div>
+              <div class="map-foot">Next.js / TypeScript / Neon / n8n</div>
             </div>
           </div>
         </article>
@@ -125,7 +143,7 @@
         </article>
 
         <article class="case-card case-amber" data-reveal>
-          <div class="case-topline"><span class="case-number">03</span><span class="case-status case-status-guarded"><i aria-hidden="true"></i>Synthetic / no-send</span></div>
+          <div class="case-topline"><span class="case-number">03</span><span class="case-status case-status-guarded"><i aria-hidden="true"></i>Operator-reviewed outreach</span></div>
           <p class="case-context">Inside Success · Outreach operations</p><h3>Appointment Setting Bot</h3>
           <p class="case-summary">An offline-first system for evidence-backed outreach drafts, reply handling, operator review, and explicit readiness controls.</p>
           <dl class="case-notes"><div><dt>The hard part</dt><dd>Automation could not be allowed to outrun platform rules, legal decisions, source quality, or human approval.</dd></div><div><dt>What I built</dt><dd>A deterministic safety layer, fact registry, conversation engine, review queue, provenance-aware lead import, and extensive regression coverage.</dd></div></dl>
@@ -149,11 +167,23 @@
         </article>
 
         <article class="case-card case-card-wide case-cortex case-ink" data-reveal>
-          <div class="case-topline"><span class="case-number">06</span><span class="case-status"><i aria-hidden="true"></i>Public personal system</span></div>
-          <p class="case-context">Independent · Knowledge infrastructure</p><h3>CortexCompiler</h3>
-          <p class="case-summary">A persistent second-brain architecture that compiles messy files into a governed, interlinked knowledge base instead of rediscovering context on every query.</p>
-          <dl class="case-notes"><div><dt>The hard part</dt><dd>Retrieval alone does not create durable understanding; sources need structure, lineage, and repeatable organization.</dd></div><div><dt>What I built</dt><dd>A read-only intake layer, compiled wiki, Obsidian links, rule-based organization, and specialist analysis workflows.</dd></div></dl>
-          <a class="case-link" href="https://github.com/moonishaider/CortexCompiler-The-Agentic-Second-Brain" target="_blank" rel="noopener noreferrer" aria-label="View the CortexCompiler repository on GitHub">View public repository <span aria-hidden="true">↗</span></a>
+          <div class="case-topline"><span class="case-number">06</span><span class="case-status"><i aria-hidden="true"></i>Persistent knowledge system</span></div>
+          <div class="case-layout cortex-layout">
+            <div class="case-main">
+              <p class="case-context">Independent · Knowledge infrastructure</p><h3>CortexCompiler</h3>
+              <p class="case-summary">A persistent second-brain architecture that compiles messy files into a governed, interlinked knowledge base instead of rediscovering context on every query.</p>
+              <dl class="case-notes"><div><dt>The hard part</dt><dd>Retrieval alone does not create durable understanding; sources need structure, lineage, and repeatable organization.</dd></div><div><dt>What I built</dt><dd>A read-only intake layer, compiled wiki, Obsidian links, rule-based organization, and specialist analysis workflows.</dd></div></dl>
+              <a class="case-link" href="https://github.com/moonishaider/CortexCompiler-The-Agentic-Second-Brain" target="_blank" rel="noopener noreferrer" aria-label="View the CortexCompiler repository on GitHub">View public repository <span aria-hidden="true">↗</span></a>
+            </div>
+            <div class="compile-map" role="img" aria-label="CortexCompiler path: raw source files pass through governed compilation into an interlinked wiki and specialist analysis">
+              <span class="compile-map-label" aria-hidden="true">COMPILATION PATH</span>
+              <div class="compile-step" aria-hidden="true"><span>01 · READ ONLY</span><strong>Raw sources</strong><small>Notes · CSV · Excel</small></div>
+              <div class="compile-arrow" aria-hidden="true">↓</div>
+              <div class="compile-step compile-step-active" aria-hidden="true"><span>02 · GOVERN</span><strong>Compile once</strong><small>Rules · lineage · structure</small></div>
+              <div class="compile-arrow" aria-hidden="true">↓</div>
+              <div class="compile-output" aria-hidden="true"><div><span>03 · PERSIST</span><strong>Interlinked wiki</strong></div><div><span>04 · APPLY</span><strong>Specialist analysis</strong></div></div>
+            </div>
+          </div>
         </article>
       </div>
     </section>
@@ -171,7 +201,7 @@
       <div class="section-heading compact-heading" data-reveal><p class="section-kicker">02 / Experience</p><div><h2 id="experience-title">Where the work happened.</h2></div></div>
       <div class="timeline">
         <article class="timeline-item current" data-reveal><div class="timeline-date">Apr 2026 — Present</div><div class="timeline-body"><p>Inside Success</p><h3>AI Systems &amp; Automation Engineer</h3><p>Building and operating applied-AI products across sales coaching, internal knowledge, media production, document workflows, and carefully governed outreach.</p></div><span class="timeline-marker">Current</span></article>
-        <article class="timeline-item" data-reveal><div class="timeline-date">Dec 2022 — Present</div><div class="timeline-body"><p>Independent / Upwork</p><h3>AI &amp; Automation Engineer</h3><p>Designing RAG systems, data pipelines, workflow automation, and internal tools for international clients.</p></div></article>
+        <article class="timeline-item" data-reveal><div class="timeline-date">Dec 2022 — Present</div><div class="timeline-body"><p>Independent AI &amp; Automation Practice</p><h3>AI &amp; Automation Engineer</h3><p>Building retrieval systems, data pipelines, and workflow automation for operational problems that do not fit off-the-shelf software.</p></div></article>
         <article class="timeline-item" data-reveal><div class="timeline-date">Feb 2025 — Nov 2025</div><div class="timeline-body"><p>Techno Storm Studios</p><h3>AI/ML Engineer</h3><p>Developed machine-learning and computer-vision applications with an emphasis on reliable deployment.</p></div></article>
         <article class="timeline-item" data-reveal><div class="timeline-date">Jan 2024 — Jun 2024</div><div class="timeline-body"><p>FAST NUCES</p><h3>Teaching Assistant</h3><p>Supported technical-computing and machine-learning coursework and mentored student project work.</p></div></article>
       </div>
@@ -184,8 +214,23 @@
 
     <section class="earlier-section" id="earlier-work" aria-labelledby="earlier-title">
       <div class="section-heading compact-heading" data-reveal><p class="section-kicker">04 / Earlier work</p><div><h2 id="earlier-title">The archive, without the clutter.</h2><p>Earlier experiments and foundations that shaped how I work now.</p></div></div>
+      <article class="agro-feature" data-reveal>
+        <div class="agro-copy">
+          <p class="case-context">Earlier work spotlight · Geospatial intelligence</p>
+          <h3>Agro Satellite Monitoring</h3>
+          <p>A Sentinel-2 pipeline that normalizes hand-drawn farm geometry, masks non-crop pixels, and tracks crop health and moisture through NDVI and NDWI.</p>
+          <dl class="agro-stats"><div><dt>3</dt><dd>Field geometries</dd></div><div><dt>139.9 ha</dt><dd>Mapped area</dd></div><div><dt>10 m</dt><dd>Pixel resolution</dd></div></dl>
+          <a class="case-link" href="https://github.com/moonishaider/Agro" target="_blank" rel="noopener noreferrer" aria-label="View the Agro Satellite Monitoring repository on GitHub">View public repository <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="agro-geometry" role="img" aria-label="Recorded field geometry summary: Wadi P01 is 41.6 hectares, Haradh P01 is 49.2 hectares, and Haradh P02 is 49.2 hectares">
+          <div class="agro-visual-label" aria-hidden="true">PROCESSED FIELD GEOMETRY</div>
+          <div class="pivot pivot-wadi" aria-hidden="true"><span>WADI P01</span><strong>41.6 HA</strong></div>
+          <div class="pivot pivot-haradh-one" aria-hidden="true"><span>HARADH P01</span><strong>49.2 HA</strong></div>
+          <div class="pivot pivot-haradh-two" aria-hidden="true"><span>HARADH P02</span><strong>49.2 HA</strong></div>
+          <div class="agro-band" aria-hidden="true"><span>B04 RED</span><span>B08 NIR</span><span>B11 SWIR</span><span>SCL MASK</span></div>
+        </div>
+      </article>
       <div class="archive-list">
-        <a href="https://github.com/moonishaider/Agro" target="_blank" rel="noopener noreferrer" data-reveal><span class="archive-index">A01</span><strong>Agro Satellite Monitoring</strong><p>Sentinel-2 crop health and moisture pipeline</p><i aria-hidden="true">↗</i></a>
         <a href="https://www.upwork.com/freelancers/~01e413158b9ab12565?p=2039464828143534080" target="_blank" rel="noopener noreferrer" data-reveal><span class="archive-index">A02</span><strong>Enterprise RAG Pipeline</strong><p>Domain-specific retrieval architecture</p><i aria-hidden="true">↗</i></a>
         <a href="https://www.upwork.com/freelancers/~01e413158b9ab12565?p=2039473433112346624" target="_blank" rel="noopener noreferrer" data-reveal><span class="archive-index">A03</span><strong>n8n Outreach Engine</strong><p>B2B lead intelligence and workflow automation</p><i aria-hidden="true">↗</i></a>
         <a href="https://github.com/moonishaider/Signature-Classification-using-CNN" target="_blank" rel="noopener noreferrer" data-reveal><span class="archive-index">A04</span><strong>Signature Classification</strong><p>CNN, HOG, and SIFT biometric comparison</p><i aria-hidden="true">↗</i></a>

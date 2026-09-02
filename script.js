@@ -1,6 +1,7 @@
 (() => {
   const root = document.documentElement;
   const themeToggle = document.querySelector('[data-theme-toggle]');
+  const themeMeta = document.querySelector('meta[name="theme-color"]');
   const menuToggle = document.querySelector('[data-menu-toggle]');
   const mobileMenu = document.querySelector('[data-mobile-menu]');
   const header = document.querySelector('[data-header]');
@@ -16,6 +17,7 @@
   const syncThemeLabel = () => {
     const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
     themeToggle.setAttribute('aria-label', `Switch to ${next} theme`);
+    themeMeta.setAttribute('content', root.dataset.theme === 'light' ? '#f0eee8' : '#0a0a0b');
   };
   syncThemeLabel();
   themeToggle.addEventListener('click', () => {
